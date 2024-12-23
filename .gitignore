@@ -1,5 +1,6 @@
 # Ignore application settings
-appsettings*.json
+appsettings.Development.json
+appsettings.json
 
 # Ignore arquivos e pastas do Visual Studio
 .vs/
