@@ -4,35 +4,7 @@ Este documento apresenta a estrutura do front-end do projeto e o detalhamento da
 📂 Estrutura do Projeto
 A estrutura do projeto foi projetada para separar as responsabilidades de forma clara, promovendo a reutilização de código e a facilidade de manutenção.
 
-frontend/
-├── .vscode/               # Configurações do editor
-├── node_modules/          # Dependências instaladas
-├── src/
-│   ├── assets/            # Arquivos estáticos (imagens, ícones, etc.)
-│   ├── components/        # Componentes Vue reutilizáveis
-│   ├── composables/       # Funções reutilizáveis (composables)
-│   ├── enums/             # Enumerações usadas no projeto
-│   ├── graphql/           # Configuração do Apollo Client e queries/mutations
-│   ├── layouts/           # Layouts principais da aplicação
-│   ├── model/             # Definições de modelos e interfaces
-│   ├── pages/             # Páginas principais da aplicação
-│   ├── plugins/           # Plugins adicionais (ex.: Vuetify)
-│   ├── routes/            # Configuração das rotas
-│   ├── stores/            # Gerenciamento de estado (Pinia)
-│   ├── utils/             # Funções utilitárias
-│   ├── App.vue            # Componente raiz da aplicação
-│   ├── main.ts            # Arquivo principal de entrada
-│   └── shims-vue.d.ts     # Declarações de tipos para Vue
-├── .editorconfig          # Configuração de estilo de código
-├── .env.development       # Variáveis de ambiente para desenvolvimento
-├── apolloconfig.js        # Configuração do Apollo Client
-├── codegen.ts             # Configuração para geração de tipos GraphQL
-├── components.d.ts        # Declarações automáticas de componentes
-├── index.html             # Arquivo HTML principal
-├── package.json           # Configuração do projeto e dependências
-├── tsconfig.json          # Configuração do TypeScript
-├── vite.config.mts        # Configuração do Vite
-└── yarn.lock              # Controle de versões das dependências (yarn)
+![image](https://github.com/user-attachments/assets/413ab3e5-8553-4e1e-8ed8-fb59543715d5)
 
 🛠️ Tecnologias Utilizadas
 Este projeto utiliza tecnologias modernas e eficientes para garantir um desenvolvimento robusto e escalável:
@@ -50,7 +22,7 @@ Os scripts disponíveis para gerenciar o projeto estão descritos abaixo:
 yarn dev: Inicia o servidor de desenvolvimento, permitindo testes locais rápidos.
 yarn build: Realiza o build da aplicação.
 
-📋 Decisões Estruturais
+📋 Decisões Estruturais    
 Separação de Responsabilidades:
 
 Cada pasta no projeto tem uma responsabilidade clara (ex.: components para componentes reutilizáveis, pages para páginas completas).
@@ -80,29 +52,7 @@ Este documento apresenta a organização estrutural e as decisões tomadas para 
 📂 Estrutura do Projeto
 O projeto é dividido em 4 camadas principais, cada uma com uma responsabilidade bem definida. A estrutura é organizada da seguinte forma:
 
-src/
-├── 1 - Core/               # Camada central com entidades e contratos
-│   ├── EdTech.Common/      # Recursos e utilitários comuns
-│   ├── EdTech.Domain/      # Definição de entidades do domínio
-│   ├── EdTech.Interfaces/  # Contratos e interfaces
-│
-├── 2 - Data/               # Camada de acesso a dados
-│   ├── EdTech.Data/        # Implementação do repositório e contexto de dados
-│       ├── Configuration/  # Configurações específicas do banco de dados
-│       ├── Context/        # Contexto do Entity Framework Core
-│       ├── Migrations/     # Arquivos de migração
-│       ├── Repositories/   # Repositórios para acesso a dados
-│
-├── 4 - API/                # Camada de API para exposição de endpoints
-│   ├── EdTech.API/         # Implementação da API REST e GraphQL
-│       ├── AutoMapper/     # Configuração do AutoMapper para mapeamento entre DTOs e entidades
-│       ├── Dtos/           # Objetos de transferência de dados
-│       ├── GraphQL/        # Configurações e resolvers para GraphQL
-│       ├── ViewModels/     # Modelos para visualização e apresentação
-│       ├── appsettings.json # Configurações da aplicação
-│       └── Program.cs      # Ponto de entrada da aplicação
-│
-└── tests/                  # Testes automatizados
+![image](https://github.com/user-attachments/assets/32cb6a39-16ae-438e-b362-1097f4c7d682)
 
 OBS: A Sln se encontra na pasta da camada API.
 
