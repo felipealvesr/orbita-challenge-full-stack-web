@@ -3,6 +3,7 @@ import Components from 'unplugin-vue-components/vite'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
+import graphql from '@rollup/plugin-graphql';
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -14,6 +15,7 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
+    graphql(),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify(),
     Components(),
@@ -39,6 +41,7 @@ export default defineConfig({
       '.ts',
       '.tsx',
       '.vue',
+      '.graphql',
     ],
   },
   server: {
