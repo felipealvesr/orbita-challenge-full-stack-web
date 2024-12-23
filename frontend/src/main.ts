@@ -1,20 +1,17 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
+import { createApp } from 'vue';
+import App from './App.vue';
+import { registerPlugins } from './plugins';
+import mitt from 'mitt';
 
-// Plugins
-import { registerPlugins } from '@/plugins'
+const app = createApp(App);
 
-// Components
-import App from './App.vue'
+registerPlugins(app);
 
-// Composables
-import { createApp } from 'vue'
+  // Event Emitter
+  const eventEmitter = mitt();
+  app.config.globalProperties.$eventEmitter = eventEmitter;
 
-const app = createApp(App)
+app.mount('#app');
 
-registerPlugins(app)
+export { eventEmitter };
 
-app.mount('#app')

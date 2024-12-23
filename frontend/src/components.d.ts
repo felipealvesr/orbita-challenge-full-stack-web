@@ -7,11 +7,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    DataGrid: typeof import('./src/components/DataGrid.vue')['default']
-    Form: typeof import('./src/components/Form.vue')['default']
-    Header: typeof import('./src/components/Header.vue')['default']
+    DataGrid: typeof import('./components/DataGrid.vue')['default']
+    Form: typeof import('./components/Form.vue')['default']
+    GlobalSnacker: typeof import('./src/components/GlobalSnacker.vue')['default']
+    Header: typeof import('./components/Header.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Sidebar: typeof import('./src/components/Sidebar.vue')['default']
+    Sidebar: typeof import('./components/Sidebar.vue')['default']
   }
 }
