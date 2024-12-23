@@ -1,7 +1,10 @@
-# Ignore appsettings files
+# Ignore application settings
 appsettings*.json
 
-# Ecosystem files for .NET 8
+# Ignore arquivos e pastas do Visual Studio
+.vs/
+
+# .NET and Visual Studio files
 *.csproj.user
 *.dotnetproj
 bin/
@@ -12,8 +15,8 @@ obj/
 .DS_Store
 
 # Node.js and JavaScript files
-node_modules
-/dist
+node_modules/
+dist/
 
 # Local environment files
 .env.local
@@ -33,3 +36,5 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore ecosystem and config files for .NET 8
