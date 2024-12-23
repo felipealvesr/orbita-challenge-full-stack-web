@@ -1,4 +1,5 @@
 🖥️ Estrutura do Front-End
+
 Este documento apresenta a estrutura do front-end do projeto e o detalhamento das decisões estruturais tomadas para garantir escalabilidade, manutenibilidade e organização eficiente do código.
 
 📂 Estrutura do Projeto
