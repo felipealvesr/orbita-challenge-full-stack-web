@@ -114,7 +114,7 @@ Essa abordagem simplifica a arquitetura e melhora a manutenção do sistema.
 🛠️ Tecnologias Utilizadas
 Este backend utiliza tecnologias modernas para garantir robustez e escalabilidade:
 
-- C# e .NET 8: Linguagem principal e framework robusto para desenvolvimento backend.
+- C# e .NET 7: Linguagem principal e framework robusto para desenvolvimento backend.
 - Entity Framework Core: ORM para abstração de acesso ao banco de dados.
 - GraphQL com HotChocolate: Comunicação flexível e eficiente entre cliente e servidor.
 - AutoMapper: Facilita o mapeamento entre entidades e DTOs.
@@ -180,3 +180,6 @@ dotnet ef --help
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 Feito com 💻 e ☕ por Felipe Alves.
+
+![image](https://github.com/user-attachments/assets/1060a291-8c49-47a7-9e82-2c2af2782953)
+
