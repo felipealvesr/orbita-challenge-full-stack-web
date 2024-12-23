@@ -86,9 +86,6 @@ A camada API é responsável por expor os recursos da aplicação, tanto via RES
 Pontos importantes: 
 
 Por que a camada de Application não foi utilizada?
-A decisão de não incluir uma camada de Application no projeto está diretamente relacionada ao uso do GraphQL e à abstração fornecida por seus resolvers (Queries, Mutations e Subscriptions). Aqui estão os principais motivos para essa escolha:
-
-Por que a camada de Application não foi utilizada?
 A escolha de não incluir uma camada de Application no projeto foi motivada pela capacidade do GraphQL de abstrair e centralizar as responsabilidades nos resolvers, eliminando a necessidade de intermediários. Os principais motivos são:
 
 - Redundância de Camadas
