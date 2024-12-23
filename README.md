@@ -13,23 +13,23 @@ Este projeto utiliza tecnologias modernas e eficientes para garantir um desenvol
 🔧 Scripts Disponíveis
 Os scripts disponíveis para gerenciar o projeto estão descritos abaixo:
 
-yarn dev: Inicia o servidor de desenvolvimento, permitindo testes locais rápidos.
-yarn build: Realiza o build da aplicação.
+- yarn dev: Inicia o servidor de desenvolvimento, permitindo testes locais rápidos.
+- yarn build: Realiza o build da aplicação.
 
 📋 Decisões Estruturais    
 Separação de Responsabilidades:
 
 Cada pasta no projeto tem uma responsabilidade clara (ex.: components para componentes reutilizáveis, pages para páginas completas).
 
-Uso de Composables:
+- Uso de Composables:
 
 A pasta composables contém funções reutilizáveis que encapsulam lógica comum, seguindo o paradigma Composition API do Vue 3.
 
-Integração com GraphQL:
+- Integração com GraphQL:
 
 A pasta graphql centraliza as configurações e operações relacionadas ao Apollo Client, garantindo uma comunicação limpa e eficiente com a API.
 
-Gerenciamento de Estado:
+- Gerenciamento de Estado:
 
 A pasta stores organiza o estado global da aplicação usando Pinia, promovendo a centralização do gerenciamento de dados.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -48,9 +48,9 @@ OBS: A Sln se encontra na pasta da camada API.
 1️⃣ Core
 A camada Core é o núcleo da aplicação e contém os seguintes módulos:
 
-EdTech.Common: Utilitários e constantes comuns para toda a aplicação.
-EdTech.Domain: Contém as entidades que representam o domínio do negócio, como modelos de dados e regras fundamentais.
-EdTech.Interfaces: Define os contratos e interfaces para os repositórios e serviços, promovendo a inversão de controle (IoC).
+- EdTech.Common: Utilitários e constantes comuns para toda a aplicação.
+- EdTech.Domain: Contém as entidades que representam o domínio do negócio, como modelos de dados e regras fundamentais.
+- EdTech.Interfaces: Define os contratos e interfaces para os repositórios e serviços, promovendo a inversão de controle (IoC).
 
 2️⃣ Data
 A camada Data gerencia o acesso e persistência de dados, garantindo abstração e desacoplamento do banco de dados:
@@ -71,18 +71,19 @@ A camada API é responsável por expor os recursos da aplicação, tanto via RES
 
 Pontos importantes: 
 
-Por que a camada de Application não foi utilizada?
+- Por que a camada de Application não foi utilizada?
 A escolha de não incluir uma camada de Application no projeto foi motivada pela capacidade do GraphQL de abstrair e centralizar as responsabilidades nos resolvers, eliminando a necessidade de intermediários. Os principais motivos são:
 
 - Redundância de Camadas
 Os resolvers já processam regras, transformam dados (DTOs/ViewModels) e orquestram chamadas ao domínio e repositórios. Isso torna a camada de Application desnecessária.
 
 - GraphQL como Interface Flexível
+  
 O GraphQL já lida com:
 
-Queries: Recuperação de dados no formato desejado.
-Mutations: Alterações de estado.
-Subscriptions: Notificações em tempo real.
+- Queries: Recuperação de dados no formato desejado.
+- Mutations: Alterações de estado.
+- Subscriptions: Notificações em tempo real.
 
 Os resolvers conectam diretamente o cliente às camadas Domain e Data.
 
@@ -143,15 +144,10 @@ remove: Remove a última migração.
 --startup-project ../EdTech/EdTech.API.csproj: Indica o projeto de inicialização.
 
 📖 Notas Adicionais
-Verificar o Status Atual das Migrações
-Use o comando abaixo para listar as migrações aplicadas ao banco:
+- Verificar o Status Atual das Migrações
+- Use o comando abaixo para listar as migrações aplicadas ao banco:
 
 dotnet ef migrations list --context AppDbContext --startup-project ../EdTech/EdTech.API.csproj
-
-Dicas Importantes:
-
-Sempre valide o arquivo de migração gerado antes de aplicá-lo ao banco para evitar alterações indesejadas.
-Caso precise criar migrações adicionais ou reverter mudanças, garanta que a versão atual do banco de dados esteja alinhada com o estado do código.
 
 Ajuda do EF Core
 Para mais opções e informações sobre comandos, utilize:
