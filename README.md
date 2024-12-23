@@ -22,16 +22,14 @@ Separação de Responsabilidades:
 Cada pasta no projeto tem uma responsabilidade clara (ex.: components para componentes reutilizáveis, pages para páginas completas).
 
 - Uso de Composables:
-
 A pasta composables contém funções reutilizáveis que encapsulam lógica comum, seguindo o paradigma Composition API do Vue 3.
 
 - Integração com GraphQL:
-
 A pasta graphql centraliza as configurações e operações relacionadas ao Apollo Client, garantindo uma comunicação limpa e eficiente com a API.
 
 - Gerenciamento de Estado:
-
 A pasta stores organiza o estado global da aplicação usando Pinia, promovendo a centralização do gerenciamento de dados.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 📚 Backend - Estrutura e Decisões Arquiteturais
