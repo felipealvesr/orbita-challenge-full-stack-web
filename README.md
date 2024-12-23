@@ -3,12 +3,12 @@
 🛠️ Tecnologias Utilizadas
 Este projeto utiliza tecnologias modernas e eficientes para garantir um desenvolvimento robusto e escalável:
 
-Vue 3: Framework JavaScript progressivo para construção de interfaces.
-Vuetify: Biblioteca de componentes baseada no Material Design.
-Apollo Client: Cliente GraphQL para integração com APIs.
-GraphQL: Linguagem de consulta para comunicação com o servidor (mutations, queries e subscriptions).
-Vite: Ferramenta de build rápida e eficiente para Vue.js.
-TypeScript: Suporte a tipos estáticos para maior confiabilidade e segurança no código.
+- Vue 3: Framework JavaScript progressivo para construção de interfaces.
+- Vuetify: Biblioteca de componentes baseada no Material Design.
+- Apollo Client: Cliente GraphQL para integração com APIs.
+- GraphQL: Linguagem de consulta para comunicação com o servidor (mutations, queries e subscriptions).
+- Vite: Ferramenta de build rápida e eficiente para Vue.js.
+- TypeScript: Suporte a tipos estáticos para maior confiabilidade e segurança no código.
 
 🔧 Scripts Disponíveis
 Os scripts disponíveis para gerenciar o projeto estão descritos abaixo:
