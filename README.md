@@ -1,12 +1,5 @@
 🖥️ Estrutura do Front-End
 
-Este documento apresenta a estrutura do front-end do projeto e o detalhamento das decisões estruturais tomadas para garantir escalabilidade, manutenibilidade e organização eficiente do código.
-
-📂 Estrutura do Projeto
-A estrutura do projeto foi projetada para separar as responsabilidades de forma clara, promovendo a reutilização de código e a facilidade de manutenção.
-
-![image](https://github.com/user-attachments/assets/413ab3e5-8553-4e1e-8ed8-fb59543715d5)
-
 🛠️ Tecnologias Utilizadas
 Este projeto utiliza tecnologias modernas e eficientes para garantir um desenvolvimento robusto e escalável:
 
@@ -39,11 +32,6 @@ A pasta graphql centraliza as configurações e operações relacionadas ao Apol
 Gerenciamento de Estado:
 
 A pasta stores organiza o estado global da aplicação usando Pinia, promovendo a centralização do gerenciamento de dados.
-
-Estilo Consistente:
-
-O uso do arquivo .editorconfig garante padronização de estilo entre desenvolvedores e ferramentas.
-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 📚 Backend - Estrutura e Decisões Arquiteturais
@@ -51,9 +39,7 @@ O uso do arquivo .editorconfig garante padronização de estilo entre desenvolve
 Este documento apresenta a organização estrutural e as decisões tomadas para o desenvolvimento do backend da aplicação EdTech, garantindo modularidade, escalabilidade e manutenção.
 
 📂 Estrutura do Projeto
-O projeto é dividido em 4 camadas principais, cada uma com uma responsabilidade bem definida. A estrutura é organizada da seguinte forma:
-
-![image](https://github.com/user-attachments/assets/32cb6a39-16ae-438e-b362-1097f4c7d682)
+O projeto é dividido em 4 camadas principais, cada uma com uma responsabilidade bem definida. 
 
 OBS: A Sln se encontra na pasta da camada API.
 
@@ -97,9 +83,8 @@ O GraphQL já lida com:
 Queries: Recuperação de dados no formato desejado.
 Mutations: Alterações de estado.
 Subscriptions: Notificações em tempo real.
+
 Os resolvers conectam diretamente o cliente às camadas Domain e Data.
-Evitar Acoplamento Desnecessário
-A lógica de transformação e validação é tratada nos resolvers, mantendo o código enxuto e evitando duplicações.
 
 - Tipagem e Customização
 O esquema do GraphQL define claramente entradas e saídas, eliminando a necessidade de uma camada intermediária para transformação de dados.
@@ -107,10 +92,7 @@ O esquema do GraphQL define claramente entradas e saídas, eliminando a necessid
 - Foco no Domínio
 A lógica de negócio está centralizada na camada Domain, enquanto os resolvers expõem essa lógica de forma flexível e ajustada às necessidades do cliente.
 
-Essa abordagem simplifica a arquitetura e melhora a manutenção do sistema.
-
 🛠️ Tecnologias Utilizadas
-Este backend utiliza tecnologias modernas para garantir robustez e escalabilidade:
 
 - C# e .NET 7: Linguagem principal e framework robusto para desenvolvimento backend.
 - Entity Framework Core: ORM para abstração de acesso ao banco de dados.
