@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header title="Cadastro de Aluno" />
+    <Header :title="isEditMode ? 'Editar Aluno' : 'Cadastro de Aluno'" />
 
     <Form @save="save" @cancel="cancel" :disable-save="!isFormValid">
       <!-- Nome -->
@@ -9,7 +9,7 @@
           <v-col cols="12" sm="4">
             <v-text-field
               label="Nome"
-              v-model="student.nome"
+              v-model="studentViewModel.nome"
               outlined
               dense
               :error-messages="validationMessages.nome"
@@ -24,7 +24,7 @@
           <v-col cols="12" sm="4">
             <v-text-field
               label="E-mail"
-              v-model="student.email"
+              v-model="studentViewModel.email"
               outlined
               dense
               :error-messages="validationMessages.email"
@@ -39,7 +39,7 @@
           <v-col cols="12" sm="4">
             <v-text-field
               label="RA"
-              v-model="student.ra"
+              v-model="studentViewModel.ra"
               outlined
               dense
               :error-messages="validationMessages.ra"
@@ -54,7 +54,7 @@
           <v-col cols="12" sm="4">
             <v-text-field
               label="CPF"
-              v-model="student.cpf"
+              v-model="studentViewModel.cpf"
               v-mask="'###.###.###-##'"
               outlined
               dense
@@ -69,22 +69,55 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed } from "vue";
-import { useRouter } from "vue-router";
+import { reactive, computed, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Header from "@/components/Header.vue";
 import Form from "@/components/Form.vue";
 import { InputRulesConstants } from "@/utils/RulesConstants";
 import { MaskUtil, MaskIdentificacao } from "@/utils/MaskUtil";
 import { toast } from 'vue3-toastify';
-import { useStudentStore } from "@/stores/student/student-store";
 import { useMutation } from "@vue/apollo-composable";
-import { INSERT_STUDENT } from "@/graphql/mutations/student.mutation";
-
-const router = useRouter();
+import { INSERT_STUDENT, UPDATE_STUDENT } from "@/graphql/mutations/student.mutation";
+import { useStudentStore } from "@/stores/student/student-store";
 
 const studentStore = useStudentStore();
 
-const { mutate: createStudent } = useMutation(INSERT_STUDENT);
+const route = useRoute();
+
+const props = defineProps({
+  ra: {
+    type: Number,  
+    required: false,
+  },
+});
+
+onMounted(() => {
+  if (!route.params.ra) {
+    studentStore.ra = 0;
+  }
+});
+
+const isEditMode = computed(() => studentStore.ra > 0);
+
+const router = useRouter();
+
+interface InsertVariables {
+  input: {
+    name: string;
+    cpf: string;
+    email: string;
+    ra: number;
+  };
+}
+
+interface UpdateVariables {
+  ra: number;
+  input: {
+    name: string;
+    cpf: string;
+    email: string;
+  };
+}
 
 interface Student {
   nome: string;
@@ -93,7 +126,12 @@ interface Student {
   cpf: string;
 }
 
-const student = reactive<Student>({
+type Variables = InsertVariables | UpdateVariables;
+
+const { mutate: createStudent } = useMutation(INSERT_STUDENT);
+const { mutate: updateStudent } = useMutation(UPDATE_STUDENT);
+
+const studentViewModel = reactive<Student>({
   nome: "",
   email: "",
   ra: "",
@@ -102,33 +140,33 @@ const student = reactive<Student>({
 
 const validations = reactive({
   nome: (): string | true => {
-    if (student.nome.trim() === "") {
+    if (studentViewModel.nome.trim() === "") {
       return InputRulesConstants.NAO_PODE_SER_VAZIO("Nome");
     }
     return true;
   },
   email: (): string | true => {
     const regexEmail = /.+@.+\..+/;
-    if (student.email.trim() === "") {
+    if (studentViewModel.email.trim() === "") {
       return InputRulesConstants.NAO_PODE_SER_VAZIO("E-mail");
     }
-    if (!regexEmail.test(student.email)) {
+    if (!regexEmail.test(studentViewModel.email)) {
       return InputRulesConstants.EMAIL_INVALIDO();
     }
     return true;
   },
   ra: (): string | true => {
-    if (student.ra.trim() === "") {
+    if (studentViewModel.ra.trim() === "") {
       return InputRulesConstants.NAO_PODE_SER_VAZIO("RA");
     }
     return true;
   },
   cpf: (): string | true => {
     const regexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
-    if (student.cpf.trim() === "") {
+    if (studentViewModel.cpf.trim() === "") {
       return InputRulesConstants.NAO_PODE_SER_VAZIO("CPF");
     }
-    if (!regexCpf.test(student.cpf)) {
+    if (!regexCpf.test(studentViewModel.cpf)) {
       return InputRulesConstants.CPF_INVALIDO();
     }
     return true;
@@ -157,35 +195,48 @@ const isFormValid = computed(() =>
 );
 
 const onCpfInput = () => {
-  student.cpf = MaskUtil.applyMask(student.cpf, MaskIdentificacao.CPF);
+  studentViewModel.cpf = MaskUtil.applyMask(studentViewModel.cpf, MaskIdentificacao.CPF);
 };
 
 const save = async () => {
   if (isFormValid.value) {
     try {
-      const variables = {
-        input: {
-          nome: student.nome,
-          email: student.email,
-          ra: student.ra,
-          cpf: student.cpf,
-        },
-      };
+      const variables: Variables = studentStore.ra
+        ? {
+            ra: studentStore.ra,
+            input: {
+              name: studentViewModel.nome,
+              cpf: studentViewModel.cpf,
+              email: studentViewModel.email,
+            },
+          }
+        : {
+            input: {
+              name: studentViewModel.nome,
+              cpf: studentViewModel.cpf,
+              email: studentViewModel.email,
+              ra: parseInt(studentViewModel.ra),
+            },
+          };
 
-      const response = await createStudent({ variables });
+      const response = studentStore.ra
+        ? await updateStudent({ variables })
+        : await createStudent({ variables });
 
-      if (response?.data?.createStudent) {
-        toast.success("Aluno cadastrado com sucesso!");
-        router.push({ name: "StudentSelect" });
+      if (response?.data?.insertStudent?.studentViewModel || response?.data?.updateStudent?.studentViewModel) {
+        toast.success(
+          studentStore.ra ? 'Aluno atualizado com sucesso!' : 'Aluno cadastrado com sucesso!'
+        );
+        router.push({ name: 'StudentSelect' });
       } else {
-        throw new Error("Erro ao cadastrar aluno");
+        throw new Error('Erro ao salvar aluno');
       }
     } catch (error) {
-      console.error("Erro ao salvar aluno:", error);
-      toast.error("Erro ao cadastrar aluno. Verifique os dados e tente novamente.");
+      console.error('Erro ao salvar aluno:', error);
+      toast.error('Erro ao salvar aluno. Verifique os dados e tente novamente.');
     }
   } else {
-    toast.warning("Por favor, preencha todos os campos corretamente.");
+    toast.warning('Por favor, preencha todos os campos corretamente.');
   }
 };
 

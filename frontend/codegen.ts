@@ -2,6 +2,8 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const graphqlUrl = 'https://localhost:7221/graphql';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const config: CodegenConfig = {
   schema: graphqlUrl,
   documents: ['src/graphql/**/*.graphql'],

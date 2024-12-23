@@ -1,8 +1,9 @@
 import { gql } from "@apollo/client/core";
 
+// Consulta sem filtro
 export const GET_STUDENTS = gql`
-  query GetStudents($filter: StudentFilterInput) {
-    students(where: $filter) {
+  query {
+    students {
       ra
       name
       email

@@ -24,7 +24,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="row in rows" :key="row.id">
+                  <tr v-for="row in rows" :key="row.ra">
                     <td
                       v-for="(column, index) in columns"
                       :key="index"
@@ -38,7 +38,7 @@
                           small
                           color="primary"
                           class="mr-2"
-                          @click="$emit('edit', row.id)"
+                          @click="$emit('edit', row.ra)"
                         >
                           Editar
                         </v-btn>
@@ -46,7 +46,7 @@
                           class="tonal"
                           small
                           color="secondary"
-                          @click="$emit('delete', row.id)"
+                          @click="$emit('delete', row.ra)"
                         >
                           Excluir
                         </v-btn>

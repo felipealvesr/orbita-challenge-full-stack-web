@@ -20,11 +20,11 @@ const routes: Array<RouteRecordRaw> = [
         component: StudentSelect,
       },
       {
-        path: 'student-form/:id?',
+        path: 'student-form/:ra?',  
         name: 'StudentForm',
         component: StudentForm,
         props: true,
-      },
+      }
     ],
   },
 ];

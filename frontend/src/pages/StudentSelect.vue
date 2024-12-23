@@ -1,8 +1,8 @@
 <template>
-  <DataGrid 
+  <DataGrid
     title="Consulta de Alunos"
     :columns="columns"
-    :rows="filteredStudents"
+    :rows="studentOnList" 
     :has-default-actions="true"
     @edit="editStudent"
     @delete="deleteStudent"
@@ -28,6 +28,14 @@
       </v-btn>
     </div>
   </DataGrid>
+
+  <v-progress-circular
+    v-if="loading"
+    indeterminate
+    color="primary"
+    size="50"
+    class="loading-spinner"
+  />
 </template>
 
 <style scoped>
@@ -52,40 +60,58 @@
 .btn-left {
   margin-right: auto;
 }
+
+.loading-spinner {
+  display: block;
+  margin: 20px auto;
+}
 </style>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import DataGrid from "@/components/DataGrid.vue";
 import router from "@/routes/router";
 import { useQuery } from "@vue/apollo-composable";
 import { GET_STUDENTS } from "@/graphql/queries/student.query";
 import { useStudentStore } from "@/stores/student/student-store";
-import StudentViewModel from "@/model/StudentViewModel";
+import { StudentViewModel } from "@/graphql/graphql";  
 
-const studentStore = useStudentStore();
+const studentOnList = ref<StudentViewModel[]>([]); 
+
+// const alunos = ref([
+//   { ra: 12345, name: "João Silva", email: "joao.silva@example.com", cpf: "123.456.789-01" },
+//   { ra: 67890, name: "Maria Oliveira", email: "maria.oliveira@example.com", cpf: "234.567.890-12" },
+//   { ra: 11223, name: "Pedro Costa", email: "pedro.costa@example.com", cpf: "345.678.901-23" },
+//   { ra: 44556, name: "Ana Souza", email: "ana.souza@example.com", cpf: "456.789.012-34" },
+//   { ra: 78901, name: "Carlos Pereira", email: "carlos.pereira@example.com", cpf: "567.890.123-45" },
+// ]);
+
 const searchQuery = ref("");
-const alunos = ref<StudentViewModel[]>([]);
+const studentStore = useStudentStore();
 
-const queryVariables = ref({
-  filter: {}, 
-});
+const { result: listStudentsResult, loading, error } = useQuery(GET_STUDENTS);
 
-const { result: listStudentsResult, refetch, loading, error } = useQuery(GET_STUDENTS, queryVariables);
-
-onMounted(async () => {
+const fetchStudents = async () => {
   try {
-    await refetch();
-    if (listStudentsResult.value?.students?.nodes) {
-      alunos.value = listStudentsResult.value.students.nodes;
+    if (listStudentsResult.value?.students) {
+      studentOnList.value = listStudentsResult.value.students.map((student: any) => ({
+        ra: student.ra,
+        name: student.name,
+        email: student.email,
+        cpf: student.cpf,
+      }));
     }
   } catch (err) {
     console.error("Erro ao buscar alunos:", err);
   }
+};
+
+onMounted(() => {
+  fetchStudents(); 
 });
 
 const filteredStudents = computed(() => {
-  return alunos.value.filter((aluno) =>
+  return studentOnList.value.filter((aluno) =>
     Object.values(aluno)
       .join(" ")
       .toLowerCase()
@@ -104,15 +130,24 @@ const insertStudent = () => router.push({ name: "StudentForm" });
 
 const editStudent = (ra: number) => {
   studentStore.SET_STUDENT_RA(ra);
-  router.push({ name: "StudentForm", params: { ra } });
+  router.push({
+    name: "StudentForm",
+    params: { ra },
+  });
 };
 
 const deleteStudent = async (ra: number) => {
   try {
-    alunos.value = alunos.value.filter((a) => a.ra !== ra);
+    studentOnList.value = studentOnList.value.filter((a) => a.ra !== ra);
     console.log(`Aluno com RA ${ra} removido.`);
   } catch (error) {
     console.error("Erro ao deletar aluno:", error);
   }
 };
+
+watch(searchQuery, (newSearch) => {
+  if (newSearch.trim() === "") {
+    fetchStudents(); 
+  }
+});
 </script>

@@ -1,25 +1,30 @@
 import { gql } from "@apollo/client/core";
+import { InsertStudentInput, DeleteStudentInput, UpdateStudentInput } from "@/graphql/graphql";
 
 export const INSERT_STUDENT = gql`
-  mutation InsertStudent($input: InsertStudentInput!) {
-    insertStudent(input: $input) {
+mutation InsertStudent($input: InsertStudentInput!) {
+  insertStudent(input: $input) {
+    studentViewModel {
       ra
-      nome
+      name
       email
       cpf
     }
   }
+}
 `;
 
 export const UPDATE_STUDENT = gql`
-  mutation UpdateStudent($ra: Int!, $input: UpdateStudentInput!) {
-    updateStudent(ra: $ra, input: $input) {
+mutation UpdateStudent($ra: Int!, $input: UpdateStudentInput!) {
+  updateStudent(ra: $ra, input: $input) {
+    studentViewModel {
       ra
-      nome
+      name
       email
       cpf
     }
   }
+}
 `;
 
 export const DELETE_STUDENT = gql`
