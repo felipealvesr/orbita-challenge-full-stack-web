@@ -22,13 +22,13 @@ Separação de Responsabilidades:
 Cada pasta no projeto tem uma responsabilidade clara (ex.: components para componentes reutilizáveis, pages para páginas completas).
 
 - Uso de Composables:
-A pasta composables contém funções reutilizáveis que encapsulam lógica comum, seguindo o paradigma Composition API do Vue 3.
+A pasta composables contém funções reutilizáveis que encapsulam lógica comum, seguindo o paradigma Composition API do Vue 3. 
 
 - Integração com GraphQL:
-A pasta graphql centraliza as configurações e operações relacionadas ao Apollo Client, garantindo uma comunicação limpa e eficiente com a API.
+A pasta graphql centraliza as configurações e operações relacionadas ao Apollo Client, garantindo uma comunicação limpa e eficiente com a API. Essa abordagem permite que utilize o codegen para trazer as tipagens e retornos esperados pelo backend, sendo possível gerenciar a aplicação do lado client de forma consistente. Uma das vantagens que o Graphql nos permite.
 
 - Gerenciamento de Estado:
-A pasta stores organiza o estado global da aplicação usando Pinia, promovendo a centralização do gerenciamento de dados.
+A pasta stores organiza o estado global da aplicação usando Pinia, promovendo a centralização do gerenciamento de dados. Onde apesar de eu ter a consulta que busca o aluno pelo RA ou uma busca que lista os alunos, posso também usar do gerenciamento de estado global para recuperar ou setar um dado do aluno e trafegar esses dados entre as camadas do client.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -69,8 +69,11 @@ A camada API é responsável por expor os recursos da aplicação, tanto via RES
 
 Pontos importantes: 
 
-- Por que a camada de Application não foi utilizada?
-A escolha de não incluir uma camada de Application no projeto foi motivada pela capacidade do GraphQL de abstrair e centralizar as responsabilidades nos resolvers, eliminando a necessidade de intermediários. Os principais motivos são:
+Por que a camada de Application não foi utilizada?
+
+A escolha de não incluir uma camada de Application no projeto foi motivada pela capacidade do GraphQL de abstrair e centralizar as responsabilidades nos resolvers, eliminando a necessidade de intermediários. 
+
+Os principais motivos são:
 
 - Redundância de Camadas
 Os resolvers já processam regras, transformam dados (DTOs/ViewModels) e orquestram chamadas ao domínio e repositórios. Isso torna a camada de Application desnecessária.
@@ -81,7 +84,7 @@ O GraphQL já lida com:
 
 - Queries: Recuperação de dados no formato desejado.
 - Mutations: Alterações de estado.
-- Subscriptions: Notificações em tempo real.
+- Subscriptions: Notificações em tempo real.(Criei subscriptions para notificar quando ocorre algum evento na aplicação).
 
 Os resolvers conectam diretamente o cliente às camadas Domain e Data.
 
