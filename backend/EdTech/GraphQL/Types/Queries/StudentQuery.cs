@@ -12,9 +12,7 @@ namespace EdTech.API.GraphQL.Types.Queries
 
         public StudentQuery(IMapper mapper) => _mapper = mapper;
 
-        //[UsePaging(MaxPageSize = 50)] // Limite máximo por página
-        //[UseFiltering(typeof(StudentFilterInput))]
-        //[HotChocolate.Data.UseSorting]
+        [UseFiltering(typeof(StudentFilterInput))]
 
         [GraphQLDescription("Consulta alunos no sistema com paginação, filtros e ordenação.")]
         public async Task<IEnumerable<StudentViewModel>> GetStudents(
@@ -23,8 +21,8 @@ namespace EdTech.API.GraphQL.Types.Queries
         {
             var studentList = await studentRepository.GetAllStudentsAsync();
 
-          //  await eventSender
-          //.SendAsync(nameof(studentList), studentList.Count());
+            await eventSender
+          .SendAsync(nameof(studentList), studentList.Count());
 
             return studentList
                 .Select(student => _mapper.Map<StudentViewModel>(student));

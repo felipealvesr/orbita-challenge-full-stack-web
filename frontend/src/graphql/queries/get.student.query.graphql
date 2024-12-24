@@ -1,0 +1,8 @@
+  query GetStudent($ra: Int!) {
+    student(ra: $ra) {
+      ra
+      name
+      email
+      cpf
+    }
+  }

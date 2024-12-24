@@ -1,0 +1,8 @@
+mutation DeleteStudent($input: DeleteStudentInput!) {
+  deleteStudent(input: $input) {
+    customResult {
+      success
+      message
+    }
+  }
+}

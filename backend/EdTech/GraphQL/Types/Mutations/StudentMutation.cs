@@ -47,18 +47,18 @@ namespace EdTech.API.GraphQL.Types.Mutations
         }
 
         public async Task<CustomResult> DeleteStudent(
-            int ra,
+            DeleteStudentInput input,
             [Service] IStudent studentRepository,
             [Service] ITopicEventSender eventSender)
         {
-            var student = await studentRepository.GetStudentByRAAsync(ra);
+            var student = await studentRepository.GetStudentByRAAsync(input.RA);
             if (student == null)
             {
-                return new CustomResult { Success = false, Message = $"Aluno com o RA: {ra} não encontrado." };
+                return new CustomResult { Success = false, Message = $"Aluno com o RA: {input.RA} não encontrado." };
             }
 
-            await studentRepository.DeleteStudent(ra);
-            await eventSender.SendAsync(nameof(DeleteStudent), new { RA = ra });
+            await studentRepository.DeleteStudent(input.RA);
+            await eventSender.SendAsync(nameof(DeleteStudent), new { RA = input.RA });
 
             return new CustomResult { Success = true, Message = "Aluno deletado com sucesso." };
         }

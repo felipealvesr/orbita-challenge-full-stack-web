@@ -1,3 +1,4 @@
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -52,23 +53,6 @@ export type InsertStudentInput = {
 export type InsertStudentPayload = {
   studentViewModel?: Maybe<StudentViewModel>;
 };
-
-/** Information about pagination in a connection. */
-export type PageInfo = {
-  /** When paginating forwards, the cursor to continue. */
-  endCursor?: Maybe<Scalars['String']['output']>;
-  /** Indicates whether more edges exist following the set defined by the clients arguments. */
-  hasNextPage: Scalars['Boolean']['output'];
-  /** Indicates whether more edges exist prior the set defined by the clients arguments. */
-  hasPreviousPage: Scalars['Boolean']['output'];
-  /** When paginating backwards, the cursor to continue. */
-  startCursor?: Maybe<Scalars['String']['output']>;
-};
-
-export enum SortEnumType {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
 
 export type StringOperationFilterInput = {
   and?: InputMaybe<Array<StringOperationFilterInput>>;
@@ -135,7 +119,7 @@ export type StudentQuery = {
   /** Consulta um aluno pelo RA. */
   student?: Maybe<StudentViewModel>;
   /** Consulta alunos no sistema com paginação, filtros e ordenação. */
-  students?: Maybe<StudentsConnection>;
+  students: Array<StudentViewModel>;
 };
 
 
@@ -145,11 +129,6 @@ export type StudentQueryStudentArgs = {
 
 
 export type StudentQueryStudentsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  order?: InputMaybe<Array<StudentViewModelSortInput>>;
   where?: InputMaybe<StudentFilterInput>;
 };
 
@@ -166,31 +145,6 @@ export type StudentViewModel = {
   ra: Scalars['Int']['output'];
 };
 
-export type StudentViewModelSortInput = {
-  cpf?: InputMaybe<SortEnumType>;
-  email?: InputMaybe<SortEnumType>;
-  name?: InputMaybe<SortEnumType>;
-  ra?: InputMaybe<SortEnumType>;
-};
-
-/** A connection to a list of items. */
-export type StudentsConnection = {
-  /** A list of edges. */
-  edges?: Maybe<Array<StudentsEdge>>;
-  /** A flattened list of the nodes. */
-  nodes?: Maybe<Array<StudentViewModel>>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-};
-
-/** An edge in a connection. */
-export type StudentsEdge = {
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String']['output'];
-  /** The item at the end of the edge. */
-  node: StudentViewModel;
-};
-
 export type UpdateStudentInput = {
   email: Scalars['String']['input'];
   name: Scalars['String']['input'];
@@ -199,3 +153,44 @@ export type UpdateStudentInput = {
 export type UpdateStudentPayload = {
   studentViewModel?: Maybe<StudentViewModel>;
 };
+
+export type DeleteStudentMutationVariables = Exact<{
+  input: DeleteStudentInput;
+}>;
+
+
+export type DeleteStudentMutation = { deleteStudent: { customResult?: { success: boolean, message?: string | null } | null } };
+
+export type InsertStudentMutationVariables = Exact<{
+  input: InsertStudentInput;
+}>;
+
+
+export type InsertStudentMutation = { insertStudent: { studentViewModel?: { ra: number, name: string, email: string, cpf: string } | null } };
+
+export type UpdateStudentMutationVariables = Exact<{
+  ra: Scalars['Int']['input'];
+  input: UpdateStudentInput;
+}>;
+
+
+export type UpdateStudentMutation = { updateStudent: { studentViewModel?: { ra: number, name: string, email: string, cpf: string } | null } };
+
+export type GetStudentQueryVariables = Exact<{
+  ra: Scalars['Int']['input'];
+}>;
+
+
+export type GetStudentQuery = { student?: { ra: number, name: string, email: string, cpf: string } | null };
+
+export type GetStudentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetStudentsQuery = { students: Array<{ ra: number, name: string, email: string, cpf: string }> };
+
+
+export const DeleteStudentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteStudent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DeleteStudentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteStudent"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customResult"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]}}]} as unknown as DocumentNode<DeleteStudentMutation, DeleteStudentMutationVariables>;
+export const InsertStudentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertStudent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"InsertStudentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insertStudent"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"studentViewModel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ra"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"cpf"}}]}}]}}]}}]} as unknown as DocumentNode<InsertStudentMutation, InsertStudentMutationVariables>;
+export const UpdateStudentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateStudent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ra"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateStudentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateStudent"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"ra"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ra"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"studentViewModel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ra"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"cpf"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateStudentMutation, UpdateStudentMutationVariables>;
+export const GetStudentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetStudent"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ra"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"student"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"ra"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ra"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ra"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"cpf"}}]}}]}}]} as unknown as DocumentNode<GetStudentQuery, GetStudentQueryVariables>;
+export const GetStudentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetStudents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"students"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ra"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"cpf"}}]}}]}}]} as unknown as DocumentNode<GetStudentsQuery, GetStudentsQueryVariables>;

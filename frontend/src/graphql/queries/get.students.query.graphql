@@ -1,0 +1,9 @@
+
+query GetStudents {
+    students {
+      ra
+      name
+      email
+      cpf
+    }
+  }

@@ -1,0 +1,14 @@
+
+mutation InsertStudent($input: InsertStudentInput!) {
+  insertStudent(input: $input) {
+    studentViewModel {
+      ra
+      name
+      email
+      cpf
+    }
+  }
+}
+
+
+

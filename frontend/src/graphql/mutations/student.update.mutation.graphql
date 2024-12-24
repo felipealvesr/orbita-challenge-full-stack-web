@@ -1,0 +1,10 @@
+mutation UpdateStudent($ra: Int!, $input: UpdateStudentInput!) {
+  updateStudent(ra: $ra, input: $input) {
+    studentViewModel {
+      ra
+      name
+      email
+      cpf
+    }
+  }
+}

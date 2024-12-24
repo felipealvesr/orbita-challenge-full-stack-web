@@ -3676,6 +3676,16 @@ swap-case@^2.0.2:
   dependencies:
     tslib "^2.0.3"
 
+sweetalert2@11.4.4:
+  version "11.4.4"
+  resolved "https://methodsistemas-773260350781.d.codeartifact.us-west-2.amazonaws.com/npm/packages/sweetalert2/-/sweetalert2-11.4.4.tgz#49b8db39f00a699224bb6aabcd1185b5a4fea739"
+  integrity sha512-9yYWQuRT1v9JNI/paPTSYV+68MHwe9C+HQ/I2jtfaFzoJgYRftWXOs4JqmDSjT7m2m4r8ebMMn8LcxD1Wq9B/w==
+
+sweetalert2@^11.15.2:
+  version "11.15.2"
+  resolved "https://methodsistemas-773260350781.d.codeartifact.us-west-2.amazonaws.com/npm/packages/sweetalert2/-/sweetalert2-11.15.2.tgz#194f7f2a823a622424ba04427a8a13ac6a3ef466"
+  integrity sha512-KSfHZTU2f+iivA2wudlL1jv9FjvEtJW9Fc0GKC6hhEsZS7SNz3Ppfv92Nerw0E2qqGNT9mPB/07SYEASbHvS+A==
+
 symbol-observable@^1.0.4:
   version "1.2.0"
   resolved "https://methodsistemas-773260350781.d.codeartifact.us-west-2.amazonaws.com/npm/packages/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
@@ -3953,6 +3963,13 @@ vue-router@^4.5.0:
   integrity sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==
   dependencies:
     "@vue/devtools-api" "^6.6.4"
+
+vue-sweetalert2@^5.0.11:
+  version "5.0.11"
+  resolved "https://methodsistemas-773260350781.d.codeartifact.us-west-2.amazonaws.com/npm/packages/vue-sweetalert2/-/vue-sweetalert2-5.0.11.tgz#bc8b5bd058486d4d058d2db5210bdfb8ef711b7b"
+  integrity sha512-agujdlcNeLb4Fj0/V3qgR7bEVBN8IzWFoDBP/vrSgbEGl9pjMmxnv32V3lxB0SZtQh6tL6R/UZ+C3q8tzsJbNg==
+  dependencies:
+    sweetalert2 "11.4.4"
 
 vue-the-mask@^0.11.1:
   version "0.11.1"
