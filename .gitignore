@@ -36,7 +36,6 @@ pnpm-debug.log*
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
 
 # Ignore ecosystem and config files for .NET 8
